@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ビンゴゲーム</title>
+    <style>
+        #currentNumber {
+            font-size: 24px;
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>ビンゴゲーム</h1>
+    <button onclick="drawNumber()">番号を引く</button>
+    <h2>引かれた番号: <span id="currentNumber">-</span></h2>
+    <h3>提示済みの番号:</h3>
+    <ul id="drawnNumbersList"></ul>
+    <h3>選択済みの数字一覧:</h3>
+    <textarea id="selectedNumbers" rows="5" cols="30" readonly></textarea>
+
+    <script>
+        let numbers = Array.from({ length: 75 }, (_, i) => i + 1); 
+        let drawnNumbers = [];
+
+        function drawNumber() {
+            if (numbers.length === 0) {
+                alert("すべての番号が引かれました!");
+                return;
+            }
+
+            let index = Math.floor(Math.random() * numbers.length); 
+            let drawn = numbers.splice(index, 1)[0]; 
+            drawnNumbers.push(drawn);
+
+            document.getElementById("currentNumber").textContent = drawn;
+            updateDrawnNumbersList();
+            updateSelectedNumbersTextArea();
+        }
+
+        function updateDrawnNumbersList() {
+            let list = document.getElementById("drawnNumbersList");
+            list.innerHTML = ''; 
+
+            for (let number of drawnNumbers) {
+                let li = document.createElement("li");
+                li.textContent = number;
+                list.appendChild(li);
+            }
+        }
+
+        function updateSelectedNumbersTextArea() {
+            document.getElementById("selectedNumbers").value = drawnNumbers.join(', ');
+        }
+    </script>
+</body>
+
+</html>
