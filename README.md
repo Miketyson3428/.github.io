@@ -1,57 +1,17 @@
-# .github.io
+システム説明
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Bingo Card Generator</title>
-    <style>
-        .bingo-card {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            grid-template-rows: repeat(5, 1fr);
-            width: 300px;
-            height: 300px;
-            text-align: center;
-            border: 1px solid #000;
-        }
+・第一回提出
 
-        .bingo-cell {
-            border: 1px solid #000;
-            padding: 10px;
-        }
-    </style>
-</head>
-<body>
-    <div class="bingo-card" id="bingoCard">
-    </div>
+ランダムで１〜７５までの範囲の数字をランダムに提示
+同じ数字は排出されない
+提示済みの番号は順番に記録し表示する
+画面設計
+出た数字の強調表示
+選択済みの数字の一覧
 
-    <script>
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        }
+・第二回提出
 
-        function generateBingoCard() {
-            const numbers = [];
-            for (let i = 1; i <= 25; i++) {
-                numbers.push(i);
-            }
-            shuffleArray(numbers);
+サイズは５×５
+１列目の数字の幅は１〜１５、２列目は１６〜３０、３列目は３１〜４５、４列目は４６〜６０、５列目は６１〜７５
 
-            const bingoCard = document.getElementById('bingoCard');
-            for (let row = 0; row < 5; row++) {
-                for (let col = 0; col < 5; col++) {
-                    const cell = document.createElement('div');
-                    cell.classList.add('bingo-cell');
-                    cell.textContent = numbers.pop();
-                    bingoCard.appendChild(cell);
-                }
-            }
-        }
 
-        generateBingoCard();
-    </script>
-</body>
-</html>
