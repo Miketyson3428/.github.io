@@ -1,0 +1,57 @@
+# .github.io
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bingo Card Generator</title>
+    <style>
+        .bingo-card {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            width: 300px;
+            height: 300px;
+            text-align: center;
+            border: 1px solid #000;
+        }
+
+        .bingo-cell {
+            border: 1px solid #000;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bingo-card" id="bingoCard">
+    </div>
+
+    <script>
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function generateBingoCard() {
+            const numbers = [];
+            for (let i = 1; i <= 25; i++) {
+                numbers.push(i);
+            }
+            shuffleArray(numbers);
+
+            const bingoCard = document.getElementById('bingoCard');
+            for (let row = 0; row < 5; row++) {
+                for (let col = 0; col < 5; col++) {
+                    const cell = document.createElement('div');
+                    cell.classList.add('bingo-cell');
+                    cell.textContent = numbers.pop();
+                    bingoCard.appendChild(cell);
+                }
+            }
+        }
+
+        generateBingoCard();
+    </script>
+</body>
+</html>
